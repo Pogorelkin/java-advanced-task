@@ -1,13 +1,20 @@
 package com.epam.entities;
 
-public class SleepingThread extends Thread  {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static java.lang.Thread.sleep;
+
+public class SleepingThread implements Runnable {
+    Logger logger = LoggerFactory.getLogger(SleepingThread.class);
+
     @Override
     public void run() {
-        super.run();
         try {
-            sleep(500) ;
+            logger.info("I sleep 5 seconds");
+            sleep(5000) ;
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.info(e.getMessage());
         }
     }
 }

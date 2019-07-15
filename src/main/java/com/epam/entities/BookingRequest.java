@@ -3,13 +3,13 @@ package com.epam.entities;
 import java.time.LocalDate;
 
 public class BookingRequest {
-    private Long id;
+    private Integer id;
     private String ad;
     private String hotel;
     private LocalDate date;
     private String requestSender;
 
-    public BookingRequest(Long id, String ad, String hotel, LocalDate date, String requestSender) {
+    public BookingRequest(Integer id, String ad, String hotel, LocalDate date, String requestSender) {
         this.id = id;
         this.ad = ad;
         this.hotel = hotel;
@@ -17,11 +17,11 @@ public class BookingRequest {
         this.requestSender = requestSender;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -55,5 +55,15 @@ public class BookingRequest {
 
     public void setRequestSender(String requestSender) {
         this.requestSender = requestSender;
+    }
+
+    @Override
+    public String toString() {
+        return "BookingRequest{" +
+                "id=" + id +
+                ", hotel='" + hotel + '\'' +
+                ", date=" + date +
+                ", requestSender='" + requestSender + '\'' +
+                '}';
     }
 }
