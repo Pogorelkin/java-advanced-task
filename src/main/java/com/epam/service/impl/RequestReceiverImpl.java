@@ -11,6 +11,7 @@ public class RequestReceiverImpl implements RequestReceiver {
     private BookingRequest tempRequest;
     private Logger logger = LoggerFactory.getLogger(RequestReceiverImpl.class);
     private int requestsWasReceived = 0;
+    private boolean receiveRequests = true;
 
     public RequestReceiverImpl(RequestService requestService) {
         this.requestService = requestService;
@@ -19,14 +20,22 @@ public class RequestReceiverImpl implements RequestReceiver {
     @Override
     public void run() {
         long threadId = Thread.currentThread().getId();
-        while (requestsWasReceived <= 3) {
+        while (receiveRequests) {
             try {
+                if (requestService.getReceivedRequestsAmount() == 15) {stopReceive(); break;}
                 tempRequest = requestService.receiveRequest();
-                logger.info(new StringBuilder().append("Request ").append(tempRequest.toString()).append(" were received. Receiver is ").append(threadId).toString());
+                logger.info(new StringBuilder().append("Request ").append(requestService.getReceivedRequestsAmount()).append(tempRequest.toString()).append(" were received. Receiver is ").append(threadId).toString());
             } catch (InterruptedException e) {
                 logger.info(e.getMessage());
             }
-            requestsWasReceived++;
         }
+    }
+
+    public void setReceiveRequests(boolean receiveRequests) {
+        this.receiveRequests = receiveRequests;
+    }
+
+    public void stopReceive(){
+        setReceiveRequests(false);
     }
 }
