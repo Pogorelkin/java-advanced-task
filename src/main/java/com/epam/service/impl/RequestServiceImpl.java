@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
-
 public class RequestServiceImpl implements RequestService {
     private Logger logger = LoggerFactory.getLogger(RequestServiceImpl.class);
     private Queue<BookingRequest> queue = new ArrayBlockingQueue<>(5);
