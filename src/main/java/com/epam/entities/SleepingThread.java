@@ -11,7 +11,7 @@ public class SleepingThread implements Runnable {
     @Override
     public void run() {
         try {
-            logger.info("I sleep 5 seconds");
+            logger.info("I sleep for 5 seconds");
             sleep(5000) ;
         } catch (InterruptedException e) {
             logger.info(e.getMessage());
