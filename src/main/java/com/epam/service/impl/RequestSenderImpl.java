@@ -15,10 +15,6 @@ public class RequestSenderImpl implements RequestSender {
     private boolean sendRequests = true;
     private int requestId = 1;
 
-    public RequestSenderImpl(RequestService requestService) {
-        this.requestService = requestService;
-    }
-
     public RequestSenderImpl(RequestGenerator requestGenerator, RequestService requestService) {
         this.requestGenerator = requestGenerator;
         this.requestService = requestService;
@@ -30,8 +26,7 @@ public class RequestSenderImpl implements RequestSender {
         while (sendRequests) {
             try {
                 if (requestService.getSentRequestsAmount() == 15) {
-                    stopSending();
-                    break;
+                    stopSending(); break;
                 }
                 tempRequest = requestGenerator.generateRequest(requestId);
                 requestId++;

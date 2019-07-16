@@ -9,6 +9,9 @@ public class BookingRequest {
     private LocalDate date;
     private String requestSender;
 
+    public BookingRequest() {
+    }
+
     public BookingRequest(Integer id, String ad, String hotel, LocalDate date, String requestSender) {
         this.id = id;
         this.ad = ad;

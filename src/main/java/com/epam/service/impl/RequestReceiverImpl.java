@@ -22,7 +22,7 @@ public class RequestReceiverImpl implements RequestReceiver {
         long threadId = Thread.currentThread().getId();
         while (receiveRequests) {
             try {
-                if (requestService.getReceivedRequestsAmount() == 15) {stopReceive(); break;}
+                if (requestService.getReceivedRequestsAmount() == 14) {stopReceive();}
                 tempRequest = requestService.receiveRequest();
                 logger.info(new StringBuilder().append("Request ").append(requestService.getReceivedRequestsAmount()).append(tempRequest.toString()).append(" were received. Receiver is ").append(threadId).toString());
             } catch (InterruptedException e) {

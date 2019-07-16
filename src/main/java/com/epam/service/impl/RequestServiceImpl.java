@@ -7,8 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.LinkedBlockingDeque;
+
 
 public class RequestServiceImpl implements RequestService {
     private Logger logger = LoggerFactory.getLogger(RequestServiceImpl.class);
@@ -18,7 +17,7 @@ public class RequestServiceImpl implements RequestService {
 
     @Override
     public synchronized BookingRequest receiveRequest() throws InterruptedException {
-        BookingRequest request;
+        BookingRequest request = new BookingRequest();
         while (queue.size() < 1) {
             try {
                 wait();
@@ -27,8 +26,10 @@ public class RequestServiceImpl implements RequestService {
                 throw exception;
             }
         }
-        request = queue.poll();
-        receivedRequestsAmount++;
+        if (receivedRequestsAmount < 15) {
+            request = queue.poll();
+            receivedRequestsAmount++;
+        }
         notify();
         return request;
     }
@@ -53,10 +54,10 @@ public class RequestServiceImpl implements RequestService {
                 throw exception;
             }
         }
-        queue.add(bookingRequest);
-        sentRequestsAmount++;
+        if (sentRequestsAmount < 15) {
+            queue.add(bookingRequest);
+            sentRequestsAmount++;
+        }
         notify();
     }
-
-
 }

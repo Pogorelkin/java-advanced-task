@@ -6,7 +6,9 @@ public enum Hotels {
     GAMMA("Gamma"),
     TETRA("Tetra"),
     QUADRA("Quadra"),
-    PENTA("Penta");
+    PENTA("Penta"),
+    SOMEHOTel("Somehotel)"),
+    FIVSTAHR("Five_stars");
 
     private String string;
 
